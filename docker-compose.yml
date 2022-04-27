@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+
+  k6-recette:
+    ports:
+      - "6565:6565"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=recette
+      - INFLUXDB_HOST="influxdb:8086"
+    volumes:
+      - ".:/app/"
+
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=k6
+    volumes:
+      - data:/root/.influxdbv2
+
+  grafana:
+    image: grafana/grafana-enterprise
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      
+volumes:
+  grafana-storage:
+    driver: local
+  data:
+    driver: local
