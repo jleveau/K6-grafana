@@ -1,0 +1,67 @@
+{
+    "url": {
+        "recette": "https://a04api.cdweb.biz/logistic-parcel/parcels/v1",
+        "preprod": "https://a02api.cdweb.biz/logistic-parcel/parcels/v1"
+    },
+    "execution": {
+        "vuTargets": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            128,
+            32,
+            8,
+            0
+        ],
+        "stepDuration": "20s"
+    },
+    "tests": [
+        {
+            "route": "/parcels",
+            "method": "GET",
+            "params": {
+                "pageIndex": 1,
+                "pageSize": 10
+            },
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "max_duration": 400,
+            "max_rate_req_failed": 0.1,
+            "max_rate_check_failed": 0.1
+        },
+        {
+            "route": "/parcels/ship",
+            "method": "POST",
+            "body": {
+                "olpnId": "509123419",
+                "orderId": "2103011547MAT42",
+                "partnerOrderId": "12384950581023",
+                "shippingDate": "2021-01-01T00:00:00.000+00:00",
+                "promiseShippingDateMin": "2021-01-01T00:00:00.000+00:00",
+                "promiseShippingDateMax": "2021-01-01T00:00:00.000+00:00",
+                "promiseDeliveryDateMin": "2021-01-01T00:00:00.000+00:00",
+                "promiseDeliveryDateMax": "2021-01-01T00:00:00.000+00:00",
+                "normalizedDeliveryMode": "ExpressHomeDelivery",
+                "externalReference": "21010620172XU88",
+                "recipient": {
+                    "email": "pierre.dupont@outlook.com",
+                    "companyName": "Blockbuster",
+                    "secondaryPhone": "0648653215"
+                }
+            },
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "max_duration": 400,
+            "max_rate_req_failed": 0.1,
+            "max_rate_check_failed": 0.1
+        }
+    ]
+}
