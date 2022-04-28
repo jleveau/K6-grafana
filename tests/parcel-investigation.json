@@ -1,0 +1,46 @@
+{
+    "url": {
+        "recette": "https://a04api.cdweb.biz/logistic-parcel/parcel-investigations/v1",
+        "preprod": "https://a02api.cdweb.biz/logistic-parcel/parcel-investigations/v1"
+    },
+    "execution": {
+        "vuTargets": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            128,
+            32,
+            8,
+            0
+        ],
+        "stepDuration": "20s"
+    },
+    "tests": [
+        {
+            "route": "/investigations",
+            "method": "GET",
+            "params": {
+                "PageSize": 10,
+                "Page": 1,
+                "status": "Opened",
+                "deliveryMode": "COL",
+                "carrier": "LPO",
+                "carrierParcelNumber": "9L26455731511",
+                "externalReference": "210811FxCfeYUOY"
+            },
+            "headers": {
+                "Content-Type": "application/json",
+                "Customer-ID": 3
+            },
+            "max_duration": 400,
+            "max_rate_req_failed": 0.1,
+            "max_rate_check_failed": 0.1
+        }
+    ]
+}
