@@ -12,6 +12,9 @@ services:
       - INFLUXDB_HOST="influxdb:8086"
     volumes:
       - ".:/app/"
+    depends_on:
+      - influxdb
+      - grafana
 
   influxdb:
     image: influxdb:1.8
@@ -21,6 +24,7 @@ services:
       - INFLUXDB_DB=k6
     volumes:
       - data:/root/.influxdbv2
+    restart: always
 
   grafana:
     image: grafana/grafana-enterprise
@@ -32,7 +36,8 @@ services:
       - GF_AUTH_BASIC_ENABLED=false
     volumes:
       - grafana-storage:/var/lib/grafana
-      
+    restart: always
+
 volumes:
   grafana-storage:
     driver: local

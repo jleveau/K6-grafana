@@ -7,7 +7,6 @@ import getAuthenticationToken from './authenticate.js';
 const testsDataJSON = __ENV.TEST_SETUP;
 const testsData = JSON.parse(testsDataJSON);
 
-
 const authentificationJSON = "./auth.json";
 const authConfigurations = JSON.parse(open(authentificationJSON));
 
@@ -31,7 +30,7 @@ for (const test of testsData.tests) {
     thresholds[`http_req_duration{name:${scenarioName}}`] = [`p(90) < ${test.max_duration}`];
     thresholds[`max_rate_req_failed{name:${scenarioName}}`] = [`rate < ${test.max_rate_req_failed}`];
     thresholds[`max_rate_check_failed{name:${scenarioName}}`] = [`rate < ${test.max_rate_check_failed}`];
-} 
+}
 
 export const options = {
     scenarios: scenarios,
